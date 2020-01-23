@@ -6,5 +6,6 @@ app = Celery('mhqueue')
 # module celecyconfig.py in the same dir 
 app.config_from_object('mhqueue.celeryconfig')
 
+
 if __name__ == '__main__':
     app.start()

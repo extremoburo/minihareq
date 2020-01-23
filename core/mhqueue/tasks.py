@@ -1,8 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 from .celery import app
 from celery import group
+from celery.exceptions import CeleryError, SoftTimeLimitExceeded 
 import subprocess
+from time import sleep
 
+# store the process position when a timeout is caught 
+def store_process(position):
+    print("store somewhere pos: ", position)
 
 @app.task
 def runJob(tasks):
@@ -21,5 +26,18 @@ def run(cmd, pos):
   
     except subprocess.CalledProcessError as e: 
         print("errore di subprocess", e.stderr)
+        # this doesn't work as expected as it stops celery task
+        #raise CeleryError
         return { 'retcode': 1, 'pos': pos, 'state': 'failed' }
+    
+    except SoftTimeLimitExceeded:
+        store_process(pos)
 
+@app.task
+def test():
+    try:
+        print("sleeping...")
+        sleep(3)
+        return "finito"
+    except SoftTimeLimitExceeded:
+        print("gestione soft")

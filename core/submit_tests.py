@@ -1,10 +1,7 @@
-from celeryproj.tasks import bindtest
-from celery import group
-from celery.result import ResultBase
+from mhqueue.tasks import test
 
-def on_raw_message(body):
-    print(body)
+res = test.delay()
+print(res.get())
 
-a, b = 1, 1
-r = bindtest.apply_async(args=(a, b))
-print(r.get(on_message=on_raw_message, propagate=False))
+res2 = test.apply_async(countdown=5, soft_time_limit=1)
+print(res2.get())
