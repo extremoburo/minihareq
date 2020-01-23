@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  queue:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "8080:15672"
+  states: 
+    image: redis
+    ports:
+      - "6379:6379"
