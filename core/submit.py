@@ -1,12 +1,10 @@
-from celeryproj.tasks import run, runJob, add
-from celery import group
-from celery.result import ResultBase
+from mhqueue.tasks import run, runJob
 from time import sleep
 from tqdm import tqdm 
 
 clis_lines = []
 
-with open("celeryproj/inputs/clis.txt", 'r') as clis:
+with open("mhqueue/inputs/clis.txt", 'r') as clis:
     count = 1
     for cli in clis: 
         # skip commented lines
@@ -31,22 +29,4 @@ while result.completed_count() != total:
 
 print(result.get())
 result.forget()
-
-#result = run.delay(clis_lines[0])
-# while not result.ready():
-#     print("check results")
-#     print(result.ready())
-
-#results = []
-#for result in tqdm(result_group.children[0], total=30):
-#    results.append(result.get())
-#print(results)
-
-#print(result.collect())
-#print(result.id)
-#print(result.get())
-
-#results = run.delay(['ls', '/tmp'])
-#results = run.apply_async((["ls", "/tmp"], countdown=3)
-#print("READY:", results.ready())
 

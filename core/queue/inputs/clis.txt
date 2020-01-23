@@ -1,8 +1,0 @@
-#sleep 3
-#ls /home
-#sleep 3
-#echo "ciao"
-#pwd
-sh celeryproj/mocks/flapvs.sh 10
-sh celeryproj/mocks/flapvs.sh 2
-sh celeryproj/mocks/flapvs.sh 8

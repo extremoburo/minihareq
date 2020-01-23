@@ -1,0 +1,10 @@
+#sleep 3
+#ls /home
+#sleep 3
+#echo "ciao"
+#pwd
+sh mhqueue/mocks/flapvs.sh 10
+sh mhqueue/mocks/flapvs.sh 2
+sh mhqueue/mocks/flapvs.sh 8
+# errore
+sh foobar
