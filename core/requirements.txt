@@ -2,7 +2,7 @@ amqp==2.5.2
 Babel==2.8.0
 billiard==3.6.1.0
 celery==4.4.0
-flower==0.9.3
+flower==1.2.0
 kombu==4.6.7
 pytz==2019.3
 redis==3.3.11
